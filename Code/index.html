@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ff5d73" />
+    <meta
+      name="description"
+      content="给文学的欢乐生日派对：说出生日祝福，舞台就会动起来。"
+    />
+    <title>文学，生日快乐！</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <aside class="rotate-device" aria-label="横屏提示">
+      <span class="rotate-phone" aria-hidden="true">▯</span>
+      <p>请横过手机</p>
+      <small>横屏后，文学的霓虹舞台才会启动</small>
+    </aside>
+    <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+    <div class="background-sparkles" aria-hidden="true">
+      <span>✦</span><span>✧</span><span>✦</span><span>✧</span><span>✦</span>
+    </div>
+
+    <main class="party-shell">
+      <header class="topbar">
+        <p class="topbar-kicker">NEON BIRTHDAY // LIVE</p>
+        <p class="topbar-date">SYSTEM: WENXUE_01 · ONLINE</p>
+      </header>
+
+      <div class="party-layout">
+        <section class="message-panel" aria-labelledby="pageTitle">
+          <p class="sticker"><span aria-hidden="true">✦</span> SUBJECT UNLOCKED · 今日主角</p>
+          <h1 id="pageTitle" data-text="文学，生日快乐！" aria-label="文学，生日快乐！"><span>文学</span>，生日快乐！</h1>
+          <p class="intro">
+            欢迎进入文学的生日故障现场。说点不同的话，看他立刻加载新的赛博形态。
+          </p>
+
+          <div class="command-card">
+            <div class="voice-orb" aria-hidden="true">
+              <span class="voice-wave wave-one"></span>
+              <span class="voice-wave wave-two"></span>
+              <span class="voice-wave wave-three"></span>
+              <span>♫</span>
+            </div>
+            <div>
+              <p class="command-label">VOICE COMMAND // 输入声波</p>
+              <p class="command-phrase">“文学，生日快乐！”</p>
+              <p class="command-note">其他每句话都会触发一次照片变异 + 喝彩。</p>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button class="button button-primary" id="voiceButton" type="button">
+              <span aria-hidden="true">🎙</span>
+              启动声波
+            </button>
+            <button class="button button-secondary" id="partyButton" type="button">
+              <span aria-hidden="true">🎉</span>
+              强制开趴
+            </button>
+          </div>
+
+          <p class="status-message" id="statusMessage" role="status" aria-live="polite">
+            启动声波后，任意说一句话试试。
+          </p>
+          <p class="privacy-note">麦克风只在点击后开启，网页不会保存任何语音。</p>
+        </section>
+
+        <section class="stage-panel" aria-label="文学的生日舞台">
+          <div class="stage-chrome">
+            <span class="stage-light stage-light-left"></span>
+            <span class="stage-light stage-light-right"></span>
+            <p class="stage-label">WENXUE // MUTATION STAGE</p>
+            <p class="stage-number">01</p>
+          </div>
+
+          <div class="floating-decor decor-star" aria-hidden="true">★</div>
+          <div class="floating-decor decor-heart" aria-hidden="true">♥</div>
+          <div class="floating-decor decor-burst" aria-hidden="true">✦</div>
+          <div class="balloon balloon-yellow" aria-hidden="true"></div>
+          <div class="balloon balloon-blue" aria-hidden="true"></div>
+
+          <div class="spotlight" aria-hidden="true"></div>
+          <div class="pedestal" aria-hidden="true"></div>
+
+          <div class="person-wrap" id="personWrap">
+            <div class="crown" aria-hidden="true"><i></i><i></i><i></i></div>
+            <img
+              class="birthday-person"
+              id="birthdayPerson"
+              src="assets/wenxue.png"
+              alt="穿着白色外套、举起右手的文学"
+            />
+          </div>
+
+          <div class="cake" aria-hidden="true">
+            <span class="cake-candle"></span>
+            <span class="cake-flame"></span>
+            <span class="cake-top"></span>
+            <span class="cake-middle"></span>
+            <span class="cake-bottom"></span>
+          </div>
+          <p class="stage-caption" id="stageCaption">NEON STANDBY · 说句话，加载文学的新形态</p>
+        </section>
+      </div>
+
+      <footer>
+        <span aria-hidden="true">★</span>
+        WENXUE_01 · BIRTHDAY PROTOCOL · DO NOT ACT NORMAL
+        <span aria-hidden="true">★</span>
+      </footer>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
