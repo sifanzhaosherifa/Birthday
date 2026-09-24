@@ -18,6 +18,7 @@
       <small>横屏后，文学的霓虹舞台才会启动</small>
     </aside>
     <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+    <div class="reaction-layer" id="reactionLayer" aria-hidden="true"></div>
     <div class="background-sparkles" aria-hidden="true">
       <span>✦</span><span>✧</span><span>✦</span><span>✧</span><span>✦</span>
     </div>
@@ -46,18 +47,39 @@
             <div>
               <p class="command-label">VOICE COMMAND // 输入声波</p>
               <p class="command-phrase">“文学，生日快乐！”</p>
-              <p class="command-note">其他每句话都会触发一次照片变异 + 喝彩。</p>
+              <p class="command-note">其他每句话都会触发随机形态、音效和离谱舞台反应。</p>
             </div>
           </div>
 
+          <div class="voice-feedback" id="voiceFeedback" hidden>
+            <div class="voice-feedback-topline">
+              <span><i class="voice-signal-dot" aria-hidden="true"></i>MIC INPUT · LIVE</span>
+              <span id="voiceLevelText">声波待机</span>
+            </div>
+            <div class="voice-meter" id="voiceMeter" aria-label="实时声音波形">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <p id="voiceFeedbackText" aria-live="polite">声波雷达正在连接，随便说一句试试。</p>
+          </div>
+
           <div class="button-row">
-            <button class="button button-primary" id="voiceButton" type="button">
+            <button class="button button-primary" id="voiceButton" type="button" aria-pressed="false">
               <span aria-hidden="true">🎙</span>
               启动声波
             </button>
             <button class="button button-secondary" id="partyButton" type="button">
               <span aria-hidden="true">🎉</span>
               强制开趴
+            </button>
+            <button class="button button-quiz" id="quizButton" type="button">
+              <span aria-hidden="true">❔</span>
+              文学竞猜
+            </button>
+            <button class="button button-game" id="gameButton" type="button">
+              <span aria-hidden="true">🗺️</span>
+              声控迷宫
             </button>
           </div>
 
@@ -74,6 +96,7 @@
             <p class="stage-label">WENXUE // MUTATION STAGE</p>
             <p class="stage-number">01</p>
           </div>
+          <p class="reaction-stamp" id="reactionStamp" aria-hidden="true"></p>
 
           <div class="floating-decor decor-star" aria-hidden="true">★</div>
           <div class="floating-decor decor-heart" aria-hidden="true">♥</div>
@@ -85,12 +108,21 @@
           <div class="pedestal" aria-hidden="true"></div>
 
           <div class="person-wrap" id="personWrap">
+            <div class="dance-rig" aria-hidden="true">
+              <span class="rig-torso"></span>
+              <span class="rig-limb rig-arm rig-arm-left"><i></i></span>
+              <span class="rig-limb rig-arm rig-arm-right"><i></i></span>
+              <span class="rig-limb rig-leg rig-leg-left"><i></i></span>
+              <span class="rig-limb rig-leg rig-leg-right"><i></i></span>
+              <span class="rig-boot rig-boot-left"></span>
+              <span class="rig-boot rig-boot-right"></span>
+            </div>
             <div class="crown" aria-hidden="true"><i></i><i></i><i></i></div>
             <img
               class="birthday-person"
               id="birthdayPerson"
-              src="assets/wenxue.png"
-              alt="穿着白色外套、举起右手的文学"
+              src="assets/portraits/cake-smile.png"
+              alt="手捧生日蛋糕的文学"
             />
           </div>
 
@@ -111,6 +143,84 @@
         <span aria-hidden="true">★</span>
       </footer>
     </main>
+
+    <section class="quiz-modal" id="quizModal" aria-labelledby="quizTitle" aria-modal="true" role="dialog" hidden>
+      <div class="quiz-window">
+        <div class="quiz-topline">
+          <p>WENXUE // QUESTIONABLE QUIZ</p>
+          <button class="quiz-close" id="quizClose" type="button" aria-label="关闭竞猜">×</button>
+        </div>
+        <div class="quiz-hud">
+          <span id="quizRound">ROUND 01 / 08</span>
+          <span id="quizScore">MYSTERY POINTS: 000</span>
+        </div>
+        <p class="quiz-sticker">限量赛博奖品 · 答错也很有面子</p>
+        <h2 id="quizTitle">文学有几根眉毛？</h2>
+        <p class="quiz-subtitle" id="quizSubtitle">不要思考，第一直觉通常最离谱。</p>
+        <div class="quiz-options" id="quizOptions" aria-live="polite"></div>
+        <div class="quiz-result" id="quizResult" aria-live="polite">
+          <p id="quizFeedback">请选择一个看起来最不像答案的选项。</p>
+          <p class="quiz-reward" id="quizReward">本题奖品等待掉落。</p>
+        </div>
+        <button class="quiz-next" id="quizNext" type="button" disabled>锁定答案</button>
+      </div>
+    </section>
+
+    <section class="maze-modal" id="mazeModal" aria-labelledby="mazeTitle" aria-modal="true" role="dialog" hidden>
+      <div class="maze-window">
+        <div class="maze-topline">
+          <p>WENXUE // VOICE MAZE</p>
+          <button class="maze-close" id="mazeClose" type="button" aria-label="关闭声控迷宫">×</button>
+        </div>
+        <div class="maze-hud">
+          <span>LEVEL 01 / 01</span>
+          <span class="maze-health" id="mazeHealth">体力 100</span>
+          <span class="maze-score" id="mazeScore">礼物积分 000</span>
+          <span id="mazeDistance">位置 X1 · Y5</span>
+          <span class="maze-pitch" id="mazePitch">音高 校准中</span>
+          <span class="maze-direction" id="mazeDirection">方向 ·</span>
+        </div>
+        <div class="maze-intro">
+          <p class="maze-sticker">声控副本已开启 · 不许偷偷用手推文学</p>
+          <h2 id="mazeTitle">高低音，带文学绕过真的迷宫！</h2>
+          <p>音量推进向右；高音上行；低音下行。墙会真实阻挡，绕开怪兽和地雷，冲向右上角礼物。</p>
+        </div>
+
+        <div class="maze-layout">
+          <div class="maze-board" id="mazeBoard" aria-label="文学声控迷宫关卡">
+            <div class="maze-grid" id="mazeGrid" aria-hidden="true"></div>
+            <span class="maze-start">START<br />文学出发</span>
+            <span class="maze-goal" id="mazeGoal"><b aria-hidden="true">🎁</b>礼物终点</span>
+            <div class="maze-entities" id="mazeEntities" aria-label="迷宫中的怪兽、障碍和道具"></div>
+            <p class="maze-event" id="mazeEvent" aria-live="polite"></p>
+            <div class="maze-runner" id="mazeRunner" aria-label="正在迷宫中前进的文学">
+              <span>文学</span>
+              <img src="assets/portraits/fullbody.png" alt="迷宫里的文学小人" />
+            </div>
+          </div>
+
+          <aside class="maze-controls">
+            <div class="maze-sound-orb" aria-hidden="true"><span>♫</span></div>
+            <p class="maze-control-label">VOICE NAVIGATION</p>
+            <div class="maze-meter" id="mazeMeter" aria-label="控制文学前进的声音强度">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <p class="maze-status" id="mazeStatus" aria-live="polite">点击下方按钮，先自然说一句让系统校准音高。</p>
+            <p class="maze-tip">高音 ↑ 上行 · 低音 ↓ 下行 · 音量 → 前进；说“文学生日快乐”可 ← 后退。</p>
+            <div class="maze-actions">
+              <button class="maze-start-button" id="mazeStartButton" type="button">启动声控闯关</button>
+              <button class="maze-restart-button" id="mazeRestartButton" type="button" hidden>再跑一遍</button>
+            </div>
+            <div class="maze-reward" id="mazeReward" hidden>
+              <span aria-hidden="true">✦</span>
+              <p>礼物已解锁：<b>文学勇者生日大礼包</b></p>
+              <small>内含：无限蛋糕权限、迷宫跑路资格与主角光环。</small>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
 
     <script src="script.js"></script>
   </body>
